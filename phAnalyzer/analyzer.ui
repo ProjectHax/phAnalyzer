@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>phAnalyzerClass</class>
+ <widget class="QWidget" name="phAnalyzerClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>phAnalyzer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="analyzer.qrc">
+    <normaloff>:/phAnalyzer/PH.png</normaloff>:/phAnalyzer/PH.png</iconset>
+  </property>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="analyzer.qrc"/>
+ </resources>
+ <connections/>
+</ui>

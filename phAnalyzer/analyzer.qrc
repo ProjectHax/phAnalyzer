@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="phAnalyzer">
+    <file>PH.png</file>
+  </qresource>
+</RCC>
