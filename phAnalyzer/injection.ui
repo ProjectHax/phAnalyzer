@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>injection</class>
+ <widget class="QWidget" name="injection">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>497</width>
+    <height>89</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>497</width>
+    <height>89</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>497</width>
+    <height>89</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Silkroad Packet Injector - ProjectHax.com</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="analyzer.qrc">
+    <normaloff>:/phAnalyzer/PH.png</normaloff>:/phAnalyzer/PH.png</iconset>
+  </property>
+  <widget class="QLineEdit" name="txtOpcode">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>61</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>7021</string>
+   </property>
+   <property name="maxLength">
+    <number>4</number>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtData">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>30</y>
+     <width>401</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>00 01 fd d1</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radClient">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>60</y>
+     <width>51</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Client</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="radServer">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>60</y>
+     <width>61</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Server</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkEncrypted">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>60</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Encrypted</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnInject">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>60</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Inject</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>46</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Opcode</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>10</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Packet data</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="analyzer.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>btnInject</sender>
+   <signal>clicked()</signal>
+   <receiver>injection</receiver>
+   <slot>Inject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>416</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>365</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>Inject()</slot>
+ </slots>
+</ui>
