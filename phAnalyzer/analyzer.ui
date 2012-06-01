@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>852</width>
-    <height>757</height>
+    <width>851</width>
+    <height>730</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>851</width>
+    <height>730</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>851</width>
+    <height>730</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>phAnalyzer - ProjectHax.com</string>
+   <string>phAnalyzer - ProjectHax.com - Disconnected</string>
   </property>
   <property name="windowIcon">
    <iconset resource="analyzer.qrc">
@@ -30,12 +42,19 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave_Packets"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuPackets">
+    <property name="title">
+     <string>Packets</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionInject"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuPackets"/>
   </widget>
-  <widget class="QCheckBox" name="checkBox">
+  <widget class="QCheckBox" name="chkServer">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -51,7 +70,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox_2">
+  <widget class="QCheckBox" name="chkClient">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -67,7 +86,7 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox_3">
+  <widget class="QCheckBox" name="chkEncrypted">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -86,7 +105,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>550</x>
      <y>30</y>
      <width>81</width>
      <height>21</height>
@@ -99,7 +118,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>350</x>
      <y>30</y>
      <width>51</width>
      <height>21</height>
@@ -112,21 +131,27 @@
   <widget class="QLineEdit" name="PlayerID">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>410</x>
      <y>30</y>
      <width>113</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QLineEdit" name="SelectedObject">
    <property name="geometry">
     <rect>
-     <x>560</x>
+     <x>640</x>
      <y>30</y>
      <width>113</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPlainTextEdit" name="lstPackets">
@@ -135,7 +160,7 @@
      <x>90</x>
      <y>60</y>
      <width>751</width>
-     <height>571</height>
+     <height>631</height>
     </rect>
    </property>
    <property name="font">
@@ -154,7 +179,7 @@
      <x>10</x>
      <y>110</y>
      <width>71</width>
-     <height>231</height>
+     <height>261</height>
     </rect>
    </property>
   </widget>
@@ -166,6 +191,9 @@
      <width>71</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="maxLength">
+    <number>4</number>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -185,7 +213,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>350</y>
+     <y>390</y>
      <width>46</width>
      <height>13</height>
     </rect>
@@ -198,23 +226,68 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>370</y>
+     <y>410</y>
      <width>71</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="maxLength">
+    <number>4</number>
    </property>
   </widget>
   <widget class="QListWidget" name="lstListen">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>400</y>
+     <y>440</y>
      <width>71</width>
-     <height>231</height>
+     <height>251</height>
     </rect>
    </property>
   </widget>
-  <action name="actionSave_Packets">
+  <widget class="QPushButton" name="btnClear">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>700</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>700</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkPause">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>30</y>
+     <width>51</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <action name="actionSave">
    <property name="text">
     <string>Save Packets</string>
    </property>
@@ -224,10 +297,91 @@
     <string>Exit</string>
    </property>
   </action>
+  <action name="actionSave_2">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionInject">
+   <property name="text">
+    <string>Inject</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="analyzer.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>txtIgnore</sender>
+   <signal>returnPressed()</signal>
+   <receiver>phAnalyzerClass</receiver>
+   <slot>AddIgnoreOpcode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>85</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>txtListen</sender>
+   <signal>returnPressed()</signal>
+   <receiver>phAnalyzerClass</receiver>
+   <slot>AddListenOpcode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>426</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClear</sender>
+   <signal>clicked()</signal>
+   <receiver>phAnalyzerClass</receiver>
+   <slot>Clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>224</x>
+     <y>710</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>706</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnSave</sender>
+   <signal>clicked()</signal>
+   <receiver>phAnalyzerClass</receiver>
+   <slot>Save()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>715</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>711</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>AddIgnoreOpcode()</slot>
+  <slot>AddListenOpcode()</slot>
+  <slot>Clear()</slot>
+  <slot>Save()</slot>
+ </slots>
 </ui>
