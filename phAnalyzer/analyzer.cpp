@@ -3,6 +3,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QFile>
+#include <QMenu>
 
 //Constructor
 phAnalyzer::phAnalyzer(QWidget *parent, Qt::WFlags flags) : QWidget(parent, flags), inj(0)
@@ -14,6 +15,10 @@ phAnalyzer::phAnalyzer(QWidget *parent, Qt::WFlags flags) : QWidget(parent, flag
 	connect(ui.actionSave, SIGNAL(triggered()), this, SLOT(Save()));
 	connect(ui.actionInject, SIGNAL(triggered()), this, SLOT(Inject()));
 	connect(ui.actionExit, SIGNAL(triggered()), this, SLOT(close()));
+
+	//Connect right click menu for removing opcodes
+	connect(ui.lstIgnore, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(RemoveOpcodeMenu(const QPoint &)));
+    connect(ui.lstListen, SIGNAL(customContextMenuRequested(const QPoint &)), this, SLOT(RemoveOpcodeMenu(const QPoint &)));
 
 	//New socket
 	socket = new QTcpSocket(this);
@@ -266,30 +271,37 @@ void phAnalyzer::readyRead()
 //Saves packets
 void phAnalyzer::Save()
 {
-	//Ask the user where to save the packets
-	QString path = QFileDialog::getSaveFileName(this, "Save Packet", "", "Text Documents (*.txt)");
+	//Retrieve the packets from the user interface
+	QString packets = ui.lstPackets->toPlainText();
 
-	//Valid path check
-	if(!path.isEmpty())
+	if(!packets.isEmpty())
 	{
-		//Open the file
-		QFile file(path);
-		if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-		{
-			QMessageBox::critical(this, "Error", "Failed to open file: " + path);
-		}
-		else
-		{
-			//Retrieve the packets from the user interface
-			QString packets = ui.lstPackets->toPlainText();
+		//Ask the user where to save the packets
+		QString path = QFileDialog::getSaveFileName(this, "Save Packet", "", "Text Documents (*.txt)");
 
-			//Write the packets to the text document
-			QTextStream out(&file);
-			out << packets;
+		//Valid path check
+		if(!path.isEmpty())
+		{
+			//Open the file
+			QFile file(path);
+			if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				QMessageBox::critical(this, "Error", "Failed to open file for writing: " + path);
+			}
+			else
+			{
+				//Write the packets to the text document
+				QTextStream out(&file);
+				out << packets;
 
-			//Close the file
-			file.close();
+				//Close the file
+				file.close();
+			}
 		}
+	}
+	else
+	{
+		QMessageBox::warning(this, "Save Packets", "There is no packet data to save.");
 	}
 }
 	
@@ -305,4 +317,43 @@ void phAnalyzer::Inject()
 {
 	//Show the window
 	if(inj) inj->show();
+}
+
+//Right click menu for removing opcodes
+void phAnalyzer::RemoveOpcodeMenu(const QPoint & pos)
+{
+	//Create menu
+	QMenu menu(this);
+    menu.addAction("Remove");
+
+	if(ui.lstIgnore->hasFocus())
+	{
+		//Make sure there are selected items before displaying the context menu
+		if(!ui.lstIgnore->selectedItems().size()) return;
+
+		//Get position on the list widget for drawing the menu
+		QPoint globalPos = ui.lstIgnore->mapToGlobal(pos);
+        QAction* action = menu.exec(globalPos);
+
+		if(action && action->text() == "Remove")
+        {
+			//Get selected items and delete them
+			qDeleteAll(ui.lstIgnore->selectedItems());
+        }
+	}
+	else if(ui.lstListen->hasFocus())
+	{
+		//Make sure there are selected items before displaying the context menu
+		if(!ui.lstListen->selectedItems().size()) return;
+
+		//Get position on the list widget for drawing the menu
+		QPoint globalPos = ui.lstListen->mapToGlobal(pos);
+        QAction* action = menu.exec(globalPos);
+
+		if(action && action->text() == "Remove")
+        {
+			//Get selected items and delete them
+			qDeleteAll(ui.lstListen->selectedItems());
+        }
+	}
 }

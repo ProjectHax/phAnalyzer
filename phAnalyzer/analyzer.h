@@ -67,6 +67,9 @@ private slots:
 	//Displays the packet injection window
 	void Inject();
 
+	//Right click menu for removing opcodes
+	void RemoveOpcodeMenu(const QPoint & pos);
+
 protected:
 
 	//Processes close events
