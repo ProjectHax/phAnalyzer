@@ -17,9 +17,6 @@
 #include <iomanip>
 #include <string>
 
-#define HOST "localhost"		//Hostname/IP
-#define PORT 22580				//Port of phConnector or nuConnector that is used for the analyzer
-
 class phAnalyzer : public QWidget
 {
 	Q_OBJECT
@@ -40,6 +37,10 @@ private:
 
 	//Packet injector UI
 	injection* inj;
+
+	//Connection info
+	QString HOST;
+	uint16_t PORT;
 
 private slots:
 

@@ -11,6 +11,31 @@ phAnalyzer::phAnalyzer(QWidget *parent, Qt::WFlags flags) : QWidget(parent, flag
 	//Sets up the UI
 	ui.setupUi(this);
 
+	//Get absolute path to application
+	QString path = QApplication::applicationFilePath();
+	path = path.replace(path.mid(path.lastIndexOf("/")), "");
+
+	//Load settings
+	QSettings settings(path + "/phAnalyzer.ini", QSettings::IniFormat);
+	HOST = settings.value("phAnalyzer/Host").toString();
+	PORT = settings.value("phAnalyzer/Port").toUInt();
+
+	//Make sure the host/IP is not empty
+	if(HOST.isEmpty())
+	{
+		//Set default IP
+		settings.setValue("phAnalyzer/Host", "127.0.0.1");
+		HOST = "127.0.0.1";
+	}
+
+	//Make sure the port is not null
+	if(PORT == 0)
+	{
+		//Set default port
+		settings.setValue("phAnalyzer/Port", 22580);
+		PORT = 22580;
+	}
+
 	//Connect file menu actions
 	connect(ui.actionSave, SIGNAL(triggered()), this, SLOT(Save()));
 	connect(ui.actionInject, SIGNAL(triggered()), this, SLOT(Inject()));
@@ -304,7 +329,7 @@ void phAnalyzer::Save()
 		QMessageBox::warning(this, "Save Packets", "There is no packet data to save.");
 	}
 }
-	
+
 //Clears the packet window
 void phAnalyzer::Clear()
 {
