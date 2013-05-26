@@ -84,7 +84,7 @@ void phAnalyzer::AddIgnoreOpcode()
 	if(text.length() == 4)
 	{
 		//Clear text box
-		ui.txtIgnore->setText("");
+		ui.txtIgnore->clear();
 
 		//See if the opcode is already in the list
 		for(int x = 0; x < ui.lstIgnore->count(); ++x)
@@ -111,7 +111,7 @@ void phAnalyzer::AddListenOpcode()
 	if(text.length() == 4)
 	{
 		//Clear text box
-		ui.txtListen->setText("");
+		ui.txtListen->clear();
 
 		//See if the opcode is already in the list
 		for(int x = 0; x < ui.lstListen->count(); ++x)
